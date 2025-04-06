@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: python-webapp
+  name: python-webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: python-webapp
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: python-webapp
+    spec:
+      containers:
+      - image: dheeraj7444/python-webapp:8
+        name: python-webapp
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: python-webapp
+  name: python-webapp
+spec:
+  ports:
+  - port: 5000
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app: python-webapp
+  type: NodePort
+status:
+  loadBalancer: {}
